@@ -29,26 +29,25 @@ public class DagSolution {
 
         new Thread(new Runnable() {
             public void run() {
-                System.out.print("1_");
                 printAllNode(bNode);
             }
         }).start();
     }
-    public static void printAllNode(Node node){
+
+    public static void printAllNode(Node node) {
         while (node.hasNext()) {
-            System.out.println(node.value());
+            System.out.println("Task " + node.value());
             if (node.hasSubNext()) {
                 final Node finalNode = node;
                 new Thread(new Runnable() {
                     public void run() {
-                        System.out.print("2_");
                         printAllNode(finalNode.getSubNext());
                     }
                 }).start();
             }
             node = node.getNext();
         }
-        System.out.println(node.value());
+        System.out.println("Task " + node.value());
     }
 
 }
